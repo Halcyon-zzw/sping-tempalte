@@ -1,12 +1,6 @@
 package ${package.Controller};
 
-import ${package.Entity}.${entity};
 import ${package.Service}.${table.serviceName};
-<#if table.importPackages??>
-<#list table.importPackages as pkg>
-import ${pkg};
-</#list>
-</#if>
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 

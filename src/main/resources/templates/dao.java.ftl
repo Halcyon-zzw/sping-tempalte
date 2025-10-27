@@ -1,4 +1,4 @@
-package ${package.Entity}.dao;
+package ${package.Parent}.dao;
 
 import ${package.Entity}.${entity};
 import ${package.Mapper}.${table.mapperName};

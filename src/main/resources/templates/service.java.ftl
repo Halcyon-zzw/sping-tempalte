@@ -1,12 +1,5 @@
 package ${package.Service};
 
-import ${package.Entity}.${entity};
-<#if table.importPackages??>
-<#list table.importPackages as pkg>
-import ${pkg};
-</#list>
-</#if>
-
 /**
  * <p>
  * ${table.comment!} 服务类

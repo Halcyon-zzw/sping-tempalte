@@ -1,13 +1,7 @@
 package ${package.ServiceImpl};
 
-import ${package.Entity}.${entity};
-import ${package.Entity}.dao.${entity}Dao;
+import ${package.Parent}.dao.${entity}Dao;
 import ${package.Service}.${table.serviceName};
-<#if table.importPackages??>
-<#list table.importPackages as pkg>
-import ${pkg};
-</#list>
-</#if>
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
