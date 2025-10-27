@@ -33,7 +33,6 @@ public class CodeGenerator {
                 })
                 // 包配置
                 .packageConfig(builder -> {
-
                     builder.parent(parent) // 设置父包名
                             .entity("entity") // 实体类包名
                             .service("service") // Service包名
@@ -53,22 +52,37 @@ public class CodeGenerator {
                             .enableLombok() // 开启 Lombok
                             .enableTableFieldAnnotation() // 开启字段注解
                             .logicDeleteColumnName("is_deleted") // 逻辑删除字段名
+                            .versionColumnName("version") // 乐观锁字段名
 
                             // Controller 策略配置
                             .controllerBuilder()
                             .enableHyphenStyle() // 开启驼峰转连字符
                             .enableRestStyle() // 开启生成 @RestController 控制器
 
-                            // Service 策略配置
+                            // Service 策略配置 - 不继承任何类
                             .serviceBuilder()
                             .formatServiceFileName("%sService") // 服务类名称格式
                             .formatServiceImplFileName("%sServiceImpl")
+
 
                             // Mapper 策略配置
                             .mapperBuilder()
                             .enableMapperAnnotation() // 开启 @Mapper
                             .enableBaseResultMap() // 启用 BaseResultMap
                             .enableBaseColumnList(); // 启用 BaseColumnList
+                })
+                // 注入配置 - 自定义生成Dao层
+                .injectionConfig(builder -> {
+                    builder.beforeOutputFile((tableInfo, objectMap) -> {
+                                System.out.println("tableInfo: " + tableInfo.getEntityName() + " objectMap: " + objectMap.size());
+                            })
+                            .customFile(builder2 -> {
+                                // 生成Dao类
+                                builder2.fileName("Dao")
+                                        .templatePath("/templates/dao.java.ftl")
+                                        .packageName("dao")
+                                        .enableFileOverride();
+                            });
                 })
                 // 模板引擎配置
                 .templateEngine(new FreemarkerTemplateEngine())
