@@ -10,6 +10,9 @@ import java.util.Collections;
 public class CodeGenerator {
 
     public static void main(String[] args) {
+        // 文件覆盖配置 - 设置为 false 可以避免覆盖已存在的文件
+        boolean enableFileOverride = true;
+
         // 数据库配置
         String url = "jdbc:mysql://10.95.16.85:3306/river_chart_luo_writ?characterEncoding=UTF8&autoReconnect=true&allowMultiQueries=true&rewriteBatchedStatements=true&serverTimezone=GMT%2B7&useSSL=false";
         String username = "dev_rw";
@@ -53,21 +56,25 @@ public class CodeGenerator {
                             .enableTableFieldAnnotation() // 开启字段注解
                             .logicDeleteColumnName("is_deleted") // 逻辑删除字段名
                             .versionColumnName("version") // 乐观锁字段名
+                            .enableFileOverride() // 根据配置决定是否覆盖文件
 
                             // Controller 策略配置
                             .controllerBuilder()
                             .enableHyphenStyle() // 开启驼峰转连字符
                             .enableRestStyle() // 开启生成 @RestController 控制器
+                            .enableFileOverride() // 根据配置决定是否覆盖文件
 
                             // Service 策略配置 - 不继承任何类
                             .serviceBuilder()
                             .formatServiceFileName("%sService") // 服务类名称格式
                             .formatServiceImplFileName("%sServiceImpl")
+                            .enableFileOverride() // 根据配置决定是否覆盖文件
 
 
                             // Mapper 策略配置
                             .mapperBuilder()
-                            .enableMapperAnnotation(); // 开启 @Mapper
+                            .enableMapperAnnotation() // 开启 @Mapper
+                            .enableFileOverride(); // 根据配置决定是否覆盖文件
                 })
                 // 注入配置 - 自定义生成Dao层
                 .injectionConfig(builder -> {
@@ -86,7 +93,8 @@ public class CodeGenerator {
                 .templateEngine(new FreemarkerTemplateEngine())
                 // 模板配置
                 .templateConfig(builder -> {
-                    builder.service("/templates/service.java.ftl")
+                    builder.entity("/templates/entity.java.ftl")
+                           .service("/templates/service.java.ftl")
                            .serviceImpl("/templates/serviceImpl.java.ftl")
                            .controller("/templates/controller.java.ftl");
                 })
