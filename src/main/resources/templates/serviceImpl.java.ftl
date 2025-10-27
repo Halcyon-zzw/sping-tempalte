@@ -1,7 +1,7 @@
 package ${package.ServiceImpl};
 
 import ${package.Entity}.${entity};
-import ${package.Mapper}.${table.mapperName};
+import ${package.Entity}.dao.${entity}Dao;
 import ${package.Service}.${table.serviceName};
 <#if table.importPackages??>
 <#list table.importPackages as pkg>
@@ -28,7 +28,7 @@ open class ${table.serviceImplName} : ${table.serviceName} {
 public class ${table.serviceImplName} implements ${table.serviceName} {
 
     @Autowired
-    private ${table.mapperName} ${table.mapperName?uncap_first};
+    private ${entity}Dao ${entity?uncap_first}Dao;
 
 }
 </#if>

@@ -2,8 +2,8 @@ package ${package.Entity}.dao;
 
 import ${package.Entity}.${entity};
 import ${package.Mapper}.${table.mapperName};
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Repository;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
 * <p>
@@ -14,6 +14,9 @@ import org.springframework.stereotype.Repository;
 * @since ${date}
 */
 @Repository
-public class ${entity}Dao extends ServiceImpl<${table.mapperName}, ${entity}> {
+public class ${entity}Dao {
+
+    @Autowired
+    private ${table.mapperName} ${table.mapperName?uncap_first};
 
 }

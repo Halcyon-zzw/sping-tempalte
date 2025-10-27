@@ -67,9 +67,7 @@ public class CodeGenerator {
 
                             // Mapper 策略配置
                             .mapperBuilder()
-                            .enableMapperAnnotation() // 开启 @Mapper
-                            .enableBaseResultMap() // 启用 BaseResultMap
-                            .enableBaseColumnList(); // 启用 BaseColumnList
+                            .enableMapperAnnotation(); // 开启 @Mapper
                 })
                 // 注入配置 - 自定义生成Dao层
                 .injectionConfig(builder -> {
@@ -89,7 +87,8 @@ public class CodeGenerator {
                 // 模板配置
                 .templateConfig(builder -> {
                     builder.service("/templates/service.java.ftl")
-                           .serviceImpl("/templates/serviceImpl.java.ftl");
+                           .serviceImpl("/templates/serviceImpl.java.ftl")
+                           .controller("/templates/controller.java.ftl");
                 })
                 .execute();
     }
