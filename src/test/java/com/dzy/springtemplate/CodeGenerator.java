@@ -86,6 +86,11 @@ public class CodeGenerator {
                 })
                 // 模板引擎配置
                 .templateEngine(new FreemarkerTemplateEngine())
+                // 模板配置
+                .templateConfig(builder -> {
+                    builder.service("/templates/service.java.ftl")
+                           .serviceImpl("/templates/serviceImpl.java.ftl");
+                })
                 .execute();
     }
 }
