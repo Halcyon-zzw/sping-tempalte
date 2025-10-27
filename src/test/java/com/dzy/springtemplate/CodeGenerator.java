@@ -76,7 +76,7 @@ public class CodeGenerator {
                             })
                             .customFile(builder2 -> {
                                 // 生成Dao类
-                                builder2.fileName("Dao")
+                                builder2.fileName("Dao.java")
                                         .templatePath("/templates/dao.java.ftl")
                                         .packageName("dao")
                                         .enableFileOverride();
