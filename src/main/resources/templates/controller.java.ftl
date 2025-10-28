@@ -1,8 +1,13 @@
 package ${package.Controller};
 
+import ${package.Parent}.dto.${entity}DTO;
 import ${package.Service}.${table.serviceName};
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 /**
  * <p>
@@ -14,6 +19,8 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 @RestController
 @RequestMapping("<#if package.ModuleName?? && package.ModuleName != "">/${package.ModuleName}</#if>/<#if controllerMappingHyphenStyle??>${controllerMappingHyphen}<#else>${table.entityPath}</#if>")
+@Tag(name = "${table.comment!}管理", description = "${table.comment!}相关接口")
+@Validated
 <#if kotlin>
 class ${table.controllerName}<#if superControllerClass??> : ${superControllerClass}()</#if>
 <#else>
@@ -25,6 +32,58 @@ public class ${table.controllerName} {
 
     @Autowired
     private ${table.serviceName} ${table.serviceName?uncap_first};
+
+    /**
+     * 根据ID获取${table.comment!}
+     */
+    @GetMapping("/{id}")
+    @Operation(summary = "获取${table.comment!}", description = "根据ID获取${table.comment!}详情")
+    public ResponseEntity<${entity}DTO> getUser(@PathVariable Long id) {
+        ${entity}DTO ${entity?uncap_first}DTO = ${table.serviceName?uncap_first}.getById(id);
+        if (${entity?uncap_first}DTO != null) {
+            return ResponseEntity.ok(${entity?uncap_first}DTO);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    /**
+     * 创建${table.comment!}
+     */
+    @PostMapping
+    @Operation(summary = "创建${table.comment!}", description = "创建新的${table.comment!}")
+    public ResponseEntity<${entity}DTO> createUser(@RequestBody @Validated ${entity}DTO ${entity?uncap_first}DTO) {
+        ${entity}DTO result = ${table.serviceName?uncap_first}.save(${entity?uncap_first}DTO);
+        if (result != null) {
+            return ResponseEntity.ok(result);
+        } else {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    /**
+     * 根据ID删除${table.comment!}
+     */
+    @DeleteMapping("/{id}")
+    @Operation(summary = "删除${table.comment!}", description = "根据ID删除${table.comment!}")
+    public ResponseEntity<Boolean> deleteById(@PathVariable Long id) {
+        boolean success = ${table.serviceName?uncap_first}.removeById(id);
+        return ResponseEntity.ok(success);
+    }
+
+    /**
+     * 根据ID更新${table.comment!}
+     */
+    @PutMapping("/{id}")
+    @Operation(summary = "更新${table.comment!}", description = "根据ID更新${table.comment!}信息")
+    public ResponseEntity<${entity}DTO> updateById(@PathVariable Long id, @RequestBody @Validated ${entity}DTO ${entity?uncap_first}DTO) {
+        ${entity}DTO result = ${table.serviceName?uncap_first}.updateById(id, ${entity?uncap_first}DTO);
+        if (result != null) {
+            return ResponseEntity.ok(result);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
 }
 </#if>

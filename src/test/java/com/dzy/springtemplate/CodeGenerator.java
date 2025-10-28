@@ -87,6 +87,20 @@ public class CodeGenerator {
                                         .templatePath("/templates/dao.java.ftl")
                                         .packageName("dao")
                                         .enableFileOverride();
+                            })
+                            .customFile(builder2 -> {
+                                // 生成DTO类
+                                builder2.fileName("DTO.java")
+                                        .templatePath("/templates/dto.java.ftl")
+                                        .packageName("dto")
+                                        .enableFileOverride();
+                            })
+                            .customFile(builder2 -> {
+                                // 生成Convert接口
+                                builder2.fileName("Convert.java")
+                                        .templatePath("/templates/convert.java.ftl")
+                                        .packageName("convert")
+                                        .enableFileOverride();
                             });
                 })
                 // 模板引擎配置
