@@ -1,9 +1,11 @@
 package com.dzy.springtemplate.common;
 
+import com.dzy.springtemplate.util.TraceIdUtil;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
+import org.slf4j.MDC;
 
 import java.io.Serializable;
 
@@ -32,6 +34,10 @@ public class Result<T> implements Serializable {
      */
     @Schema(description = "响应消息", example = "操作成功")
     private String message;
+
+
+    @Schema(description = "traceId")
+    private String traceId = TraceIdUtil.getTraceId();
 
     /**
      * 响应数据
