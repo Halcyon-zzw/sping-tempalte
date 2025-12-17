@@ -117,12 +117,12 @@ mvn spring-boot:run
 
 ### 用户管理 API
 
-| 方法 | 路径 | 描述 | 请求体 | 响应体 |
-|------|------|------|--------|--------|
-| GET | `/user/{id}` | 获取用户信息 | - | UserDTO |
-| POST | `/user` | 创建用户 | UserDTO | UserDTO |
-| PUT | `/user/{id}` | 更新用户 | UserDTO | UserDTO |
-| DELETE | `/user/{id}` | 删除用户 | - | Boolean |
+| 方法 | 路径             | 描述 | 请求体 | 响应体 |
+|------|----------------|------|--------|--------|
+| GET | `/user/{id}`   | 获取用户信息 | - | UserDTO |
+| POST | `/user/create` | 创建用户 | UserDTO | UserDTO |
+| PUT | `/user/{id}`   | 更新用户 | UserDTO | UserDTO |
+| DELETE | `/user/{id}`   | 删除用户 | - | Boolean |
 
 ### 请求示例
 
@@ -153,7 +153,7 @@ boolean enableFileOverride = true;
 
 ### 支持的表配置
 ```java
-builder.addInclude("user", "order", "product") // 设置需要生成的表名
+builder.addInclude("user", "order", "product") // 设置需要生成的表名, 为空时表示生成所有表
        .addTablePrefix("sys_", "t_")            // 设置过滤表前缀
 ```
 
