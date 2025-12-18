@@ -37,7 +37,7 @@ public class CodeGenerator {
                 // 包配置
                 .packageConfig(builder -> {
                     builder.parent(parent) // 设置父包名
-                            .entity("entity") // 实体类包名
+                            .entity("domain.entity") // 实体类包名
                             .service("service") // Service包名
                             .serviceImpl("service.impl") // Service实现类包名
                             .mapper("mapper") // Mapper包名
@@ -92,14 +92,14 @@ public class CodeGenerator {
                                 // 生成DTO类
                                 builder2.fileName("DTO.java")
                                         .templatePath("/templates/dto.java.ftl")
-                                        .packageName("dto")
+                                        .packageName("domain.dto")
                                         .enableFileOverride();
                             })
                             .customFile(builder2 -> {
                                 // 生成Convert接口
                                 builder2.fileName("Convert.java")
                                         .templatePath("/templates/convert.java.ftl")
-                                        .packageName("convert")
+                                        .packageName("domain.convert")
                                         .enableFileOverride();
                             });
                 })
