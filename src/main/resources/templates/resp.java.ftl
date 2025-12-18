@@ -1,4 +1,8 @@
-package ${package.Parent}.resp;
+<#if customMap?? && customMap.domainPackage??>
+package ${customMap.domainPackage}.resp;
+<#else>
+package ${package.Parent}.domain.resp;
+</#if>
 
 <#list table.importPackages as pkg>
 <#if pkg?contains("java.time") || pkg?contains("java.math") || pkg?contains("java.io")>

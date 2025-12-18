@@ -6,6 +6,8 @@ import com.baomidou.mybatisplus.generator.config.OutputFile;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CodeGenerator {
 
@@ -78,8 +80,18 @@ public class CodeGenerator {
                 })
                 // 注入配置 - 自定义生成Dao层
                 .injectionConfig(builder -> {
-                    builder.beforeOutputFile((tableInfo, objectMap) -> {
-                                System.out.println("tableInfo: " + tableInfo.getEntityName() + " objectMap: " + objectMap.size());
+                    // 自定义变量配置
+                    Map<String, Object> customMap = new HashMap<>();
+
+                    // Domain 包路径配置（如果不设置，模板会使用 ${package.Parent}.domain）
+                    String domainPackage = parent + ".domain";
+                    customMap.put("domainPackage", domainPackage);
+
+                    builder.customMap(customMap)
+                            .beforeOutputFile((tableInfo, objectMap) -> {
+                                System.out.println("=== 生成文件: " + tableInfo.getEntityName() + " ===");
+                                // 打印自定义变量（调试用）
+                                // System.out.println("自定义变量: " + customMap);
                             })
                             .customFile(builder2 -> {
                                 // 生成Dao类

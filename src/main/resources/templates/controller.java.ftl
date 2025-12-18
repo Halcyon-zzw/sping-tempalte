@@ -1,6 +1,10 @@
 package ${package.Controller};
 
-import ${package.Parent}.dto.${entity}DTO;
+<#if customMap?? && customMap.domainPackage??>
+import ${customMap.domainPackage}.dto.${entity}DTO;
+<#else>
+import ${package.Parent}.domain.dto.${entity}DTO;
+</#if>
 import ${package.Parent}.common.Result;
 import ${package.Parent}.exception.DataNotFoundException;
 import ${package.Service}.${table.serviceName};
