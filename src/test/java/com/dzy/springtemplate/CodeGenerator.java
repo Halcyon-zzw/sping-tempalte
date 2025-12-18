@@ -96,6 +96,20 @@ public class CodeGenerator {
                                         .enableFileOverride();
                             })
                             .customFile(builder2 -> {
+                                // 生成DTO类
+                                builder2.fileName("Resp.java")
+                                        .templatePath("/templates/resp.java.ftl")
+                                        .packageName("domain.resp")
+                                        .enableFileOverride();
+                            })
+                            .customFile(builder2 -> {
+                                // 生成DTO类
+                                builder2.fileName("Req.java")
+                                        .templatePath("/templates/req.java.ftl")
+                                        .packageName("domain.req")
+                                        .enableFileOverride();
+                            })
+                            .customFile(builder2 -> {
                                 // 生成Convert接口
                                 builder2.fileName("Convert.java")
                                         .templatePath("/templates/convert.java.ftl")

@@ -1,4 +1,4 @@
-package ${package.Parent}.dto;
+package ${package.Parent}.resp;
 
 <#list table.importPackages as pkg>
 <#if pkg?contains("java.time") || pkg?contains("java.math") || pkg?contains("java.io")>
@@ -15,7 +15,7 @@ import jakarta.validation.constraints.*;
 
 /**
  * <p>
- * ${table.comment!} DTO
+ * ${table.comment!} Resp
  * </p>
  *
  * @author ${author}
@@ -26,8 +26,8 @@ import jakarta.validation.constraints.*;
 <#if chainModel>
 @Accessors(chain = true)
 </#if>
-@Schema(name = "${entity}DTO", description = "${table.comment!} DTO")
-public class ${entity}DTO implements Serializable {
+@Schema(name = "${entity}Resp", description = "${table.comment!} Resp")
+public class ${entity}Resp implements Serializable {
 
     private static final long serialVersionUID = 1L;
 <#-- ----------  BEGIN 字段循环遍历  ---------->
